@@ -7,21 +7,29 @@ btn.addEventListener("click", function(){
     ourRequest.open('GET','https://learnwebcode.github.io/json-example/animals-'+pageCounter+'.json');
 
     ourRequest.onload = function(){
-        //console.log(ourRequest.responseText); 
+        if(ourRequest.status >= 200 && ourRequest.status<400){
+              //console.log(ourRequest.responseText); 
         var ourData = JSON.parse(ourRequest.responseText)   //ourRequest.responseText;
         //console.log(ourData[0]);
         renderHTML(ourData); 
+        }else{
+            animalContainer.innerHTML="ERROR! bad URL";
+        }
+      
 
+    };
+    ourRequest.onerror = function(){
+        animalContainer.innerHTML="ERROR! Not connected";
     };
     ourRequest.send();
     pageCounter ++;
     if(pageCounter>3){
         btn.classList.add("hide-me");
-    }
+    };
 })
 
 function renderHTML(data){
-    var htmlString= ""
+    var htmlString= "";
 
     for(i = 0; i < data.length; i ++){
         htmlString += "<p>"+ data[i].name +" is a "+ data[i].species+" that likes to eat ";
