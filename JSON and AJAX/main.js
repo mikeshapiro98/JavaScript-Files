@@ -6,5 +6,4 @@ ourRequest.open('GET','https://learnwebcode.github.io/json-example/animals-1.jso
 
 ourRequest.onload = function(){
     console.log(ourRequest.responseText); 
-    
-}
+};
