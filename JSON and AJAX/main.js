@@ -15,6 +15,9 @@ btn.addEventListener("click", function(){
     };
     ourRequest.send();
     pageCounter ++;
+    if(pageCounter>3){
+        btn.classList.add("hide-me");
+    }
 })
 
 function renderHTML(data){
