@@ -1,13 +1,28 @@
+var pageCounter = 1;
+var animalContainer = document.getElementById("animal-info");
 var btn = document.getElementById("btn");
+btn.addEventListener("click", function(){
+    // XMLHttpRequest allows the browser to connect to the 
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET','https://learnwebcode.github.io/json-example/animals-'+pageCounter+'.json');
 
+    ourRequest.onload = function(){
+        //console.log(ourRequest.responseText); 
+        var ourData = JSON.parse(ourRequest.responseText)   //ourRequest.responseText;
+        //console.log(ourData[0]);
+        renderHTML(ourData); 
 
-// XMLHttpRequest allows the browser to connect to the 
-var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET','https://learnwebcode.github.io/json-example/animals-1.json');
+    };
+    ourRequest.send();
+    pageCounter ++;
+})
 
-ourRequest.onload = function(){
-    //console.log(ourRequest.responseText); 
-    var ourData = JSON.parse(ourRequest.responseText)   //ourRequest.responseText;
-    console.log(ourData[0]);
-};
-ourRequest.send();
+function renderHTML(data){
+    var htmlString= ""
+
+for(i = 0; i < data.length; i ++){
+    htmlString += "<p>"+ data[i].name +" is a "+ data[i].species+"</p>"
+}
+
+    animalContainer.insertAdjacentHTML('beforeend', htmlString);
+}
