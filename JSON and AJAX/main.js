@@ -15,8 +15,6 @@ btn.addEventListener("click", function(){
         }else{
             animalContainer.innerHTML="ERROR! bad URL";
         }
-      
-
     };
     ourRequest.onerror = function(){
         animalContainer.innerHTML="ERROR! Not connected";
